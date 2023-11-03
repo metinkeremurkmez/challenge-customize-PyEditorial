@@ -7,7 +7,7 @@ The original readme and source code are available in the master branch. This rea
 Setting up the Environment ready by using these commands;
 ```
 # clone the customized project
-git clone -b challenge/develop https://github.com/metinkeremurkmez/PyEditorial-customize.git
+git clone -b challenge/develop https://github.com/metinkeremurkmez/challenge-customize-PyEditorial.git
 # go to the project DIR
 cd PyEditorial
 # Setting up
