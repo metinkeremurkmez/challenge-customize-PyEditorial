@@ -1,12 +1,54 @@
 version: "3.6"
-
 services:
- web:
+ django:
     build:
      context: .
      dockerfile: Dockerfile
-    command: ./manage.py runserver 0.0.0.0:8000
     volumes:
       - ./:/code
     ports:
-      - "80:8000"
+      - 127.0.0.1:8000:8000
+    #links:
+      #- db
+    #depends_on:
+      #db:
+        #condition: service_healthy
+    #networks:
+      #app_network:
+ nginx:
+    image: nginx:1.25
+    volumes:
+      - ./nginx-config/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx-config/nginx-selfsigned.crt:/etc/nginx/ssl/nginx-selfsigned.crt
+      - ./nginx-config/nginx-selfsigned.key:/etc/nginx/ssl/nginx-selfsigned.key
+    ports:
+      - 127.0.0.1:443:443
+    depends_on:
+      - django
+      #- db
+    #links:
+      #- db
+    #networks:
+      #app_network:
+ #db:
+    #image: postgres:16-alpine
+    #user: $PGUSER
+    #ports:
+      #- 127.0.0.1:5432:5432
+    #volumes:
+      #- postgre-vol:/var/lib/postgresql/data
+    #extra_hosts:
+      #- "host.docker.internal:host-gateway"
+    #env_file:
+      #- .env
+    #networks:
+      #app_network:
+    #healthcheck:
+      #test: ["CMD-SHELL", "pg_isready -h db -d db -U $PGUSER"]
+      #interval: 10s
+      #timeout: 5s
+      #retries: 5
+#networks:
+  #app_network:
+#volumes:
+  #postgre-vol:

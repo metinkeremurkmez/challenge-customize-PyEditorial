@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from django.utils.translation import ugettext_lazy as _
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -76,6 +77,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'PyEditorial.wsgi.application'
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -88,18 +90,18 @@ DATABASES = {
 }
 
 # If you need to use Postgresql, you can use this section
+
+load_dotenv()
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'PyEditorial',
-#         'USER': 'postgres',
-#         'PASSWORD': 'great123',
-#         'HOST': 'localhost',
-#         'PORT': '',
-#     }
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': os.getenv('POSTGRES_DB'),
+#        'USER': os.getenv('POSTGRES_USER'),
+#        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+#        'HOST': os.getenv('POSTGRES_HOST'),
+#        'PORT': os.getenv('POSTGRES_PORT'),
+#    }
 # }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
