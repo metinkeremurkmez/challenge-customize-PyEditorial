@@ -1,0 +1,21 @@
+name: BUILD&TEST
+
+on:
+  push:
+    branches:
+      - challenge/develop
+  pull_request:
+    branches:
+      - challenge/develop
+jobs:
+  build_and_test:
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setting up the local dockerized development environment
+      run: make setup
+
+    - name: Testing the app w/ removing non-functional containers (Only Django)
+      run: docker-compose run django pytest

@@ -9,3 +9,8 @@ python-memcached==1.59
 pytz==2020.4
 six==1.15.0
 sqlparse==0.4.4
+python-dotenv==1.0.0
+pre-commit==3.5.0
+gunicorn==21.2.0
+psycopg2==2.8.6
+pytest-django==4.4.0
