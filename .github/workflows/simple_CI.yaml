@@ -1,6 +1,9 @@
 name: BUILD&TEST
 
 on:
+  push:
+    branches:
+      - challenge/develop
   pull_request:
     branches:
       - challenge/develop
